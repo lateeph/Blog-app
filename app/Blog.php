@@ -9,6 +9,6 @@ class Blog extends Model
     protected $fillable = ['title', 'body', 'image', 'url', 'category', 'tags', ];
 
     public function comments(){
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment')->orderBy('created_at', 'DESC');
     }
 }

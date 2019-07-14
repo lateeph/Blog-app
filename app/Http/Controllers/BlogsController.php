@@ -20,12 +20,12 @@ class BlogsController extends Controller
         $category = $request->category;
         $tags = $request->tags;
         Blog::create(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category'=>$category, 'tags'=>$tags]);
-        return 'you are in the add blog post function'; 
+        return redirect()->route('admin.posts'); 
     }
 
     public function showPosts(){
         $blogs = Blog::all();
-        return view('users.posts', compact('blogs'));
+        return view('users.posts', compact('blogs')); 
     }
 
     public function showDetails($id){
@@ -57,5 +57,14 @@ class BlogsController extends Controller
         $blog->update(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category'=>$category, 'tags'=>$tags]);
         return redirect()->route('admin.posts');
     }
-}
 
+    public function destroy($id){	
+        Blog::destroy($id);
+        return redirect()->route('admin.posts');
+    }
+
+    public function category($cat){
+        $blogs = Blog::where('category', $cat)->get();
+        return view('users.category', compact('cat', 'blogs'));
+    }
+}

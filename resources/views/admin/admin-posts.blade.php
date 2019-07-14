@@ -22,6 +22,12 @@
                     <a class="btn btn-sm btn-info pull-xs-left" href="{{route('posts.edit', $blog->id)}}">
                             Edit
                     </a>
+                    <form action="{{route('posts.delete', $blog->id)}}" class="pull-xs-right5 card-link" method="POST" style="display:inline">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+                        <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+                        </input>
+                    </form>
                 </center>
                 
                 @endforeach

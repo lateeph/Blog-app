@@ -27,3 +27,5 @@ Route::post('/save-comment/{id}', 'CommentsController@saveComment')->name('comme
 Route::get('/admin-posts', 'BlogsController@showAdminPosts')->name('admin.posts');
 Route::get('/posts/edit/{id}', 'BlogsController@showEditForm')->name('posts.edit');
 Route::put('/posts/update/{id}', 'BlogsController@update')->name('admin-posts.update');
+Route::delete('/posts/{id}', 'BlogsController@destroy')->name('posts.delete');
+Route::get('/category/{id}', 'BlogsController@category')->name('category');

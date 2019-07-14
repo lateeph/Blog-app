@@ -15,6 +15,6 @@ class CommentsController extends Controller
         $comment = $request->comment;
         $blog = Blog::find($id);
         $blog->comments()->create(['name'=>$name, 'comment'=>$comment]);
-        return redirect()->route('post.details', $id);
+        return redirect()->route('posts.details', $id);
    }
 }
