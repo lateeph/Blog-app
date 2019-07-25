@@ -28,4 +28,5 @@ Route::get('/admin-posts', 'BlogsController@showAdminPosts')->name('admin.posts'
 Route::get('/posts/edit/{id}', 'BlogsController@showEditForm')->name('posts.edit');
 Route::put('/posts/update/{id}', 'BlogsController@update')->name('admin-posts.update');
 Route::delete('/posts/{id}', 'BlogsController@destroy')->name('posts.delete');
-Route::get('/category/{id}', 'BlogsController@category')->name('category');
+Route::get('/category', 'BlogsController@category')->name('category');
+Route::post('/store', 'BlogsController@store')->name('category.store');

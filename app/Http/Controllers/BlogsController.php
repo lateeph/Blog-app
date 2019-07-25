@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Blog;
 use App\Comment;
+use App\Category;
 
 class BlogsController extends Controller
 {
@@ -63,8 +64,14 @@ class BlogsController extends Controller
         return redirect()->route('admin.posts');
     }
 
-    public function category($cat){
-        $blogs = Blog::where('category', $cat)->get();
-        return view('users.category', compact('cat', 'blogs'));
+    public function category(){
+        $cat=Category::all();
+        return view('users.category', compact('cat'));
     }
+
+    public function store(Request $request){
+        Category::create($request->all());
+        return back();
+    }
+
 }
