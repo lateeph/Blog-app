@@ -65,13 +65,10 @@ class BlogsController extends Controller
     }
 
     public function category(){
-        $cat=Category::all();
-        return view('users.category', compact('cat'));
+        $blogs = Blog::all();
+        $cat = Category::all();
+        return view('users.category', compact('blogs', 'cat'));
     }
 
-    public function store(Request $request){
-        Category::create($request->all());
-        return back();
-    }
 
 }
