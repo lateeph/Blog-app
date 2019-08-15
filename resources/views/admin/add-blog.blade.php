@@ -57,13 +57,11 @@
                         <input type="text" class="form-control" name="url" placeholder="Enter Url Here">
                     </div>
                     <div class="form-group">
-                        <label for="category">Category</label>
-                        <select class="form-control" name="category">
-                            <option>News</option>
-                            <option>Business</option>
-                            <option>Entertainment</option>
-                            <option>Sports</option>
-                            <option>Technology</option>
+                        <label for="category_id">Category</label>
+                        <select class="form-control" name="category_id">
+                            @foreach($categories as $category)
+                            <option value='{{ $category->id }}'>{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">

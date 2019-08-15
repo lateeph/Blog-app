@@ -17,7 +17,7 @@
                 <center>
                     <a href="{{route('posts.details', $blog->id)}}">
                         <h3>{{  $blog->title  }}</h3>
-                            {{ $blog->category }}
+                         <p>{{ $blog->cat['name'] }}</p>
                     <br><br>
                     <a class="btn btn-sm btn-info pull-xs-left" href="{{route('posts.edit', $blog->id)}}">
                             Edit

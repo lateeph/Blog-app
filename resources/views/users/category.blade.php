@@ -8,7 +8,7 @@
         <p>{{  $blog->body  }}</p>
         <hr>
         
-        <p>Posted In: {{ $blog->cat->name }}</p>
+        <p>Posted In: {{ $blog->cat['name'] }}</p>
        
     </div>
 </div>

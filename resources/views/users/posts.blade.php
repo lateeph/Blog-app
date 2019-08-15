@@ -13,7 +13,7 @@
                     <a href="{{route('posts.details', $blog->id)}}">
                         <h3>{{  $blog->title  }}</h3>
                         <img src="/storage/{{ $blog->image }}"></a>
-                    {{ $blog->category }}
+                    {{ $blog->cat['name'] }}
                     <br><br>
                 </center>
                 

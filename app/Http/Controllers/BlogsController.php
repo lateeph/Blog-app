@@ -10,7 +10,8 @@ use App\Category;
 class BlogsController extends Controller
 {
     public function ShowAddBlogForm(){
-        return view('admin.add-blog');
+        $categories = Category::all();
+        return view('admin.add-blog')->withCategories($categories);
     }
 
     public function addBlog(Request $request){
@@ -18,9 +19,9 @@ class BlogsController extends Controller
         $body = $request->body;
         $imagePath = request('image')->store('uploads', 'public');
         $url = $request->url;
-        $category = $request->category;
+        $category_id = $request->category_id;
         $tags = $request->tags;
-        Blog::create(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category'=>$category, 'tags'=>$tags]);
+        Blog::create(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category_id'=>$category_id, 'tags'=>$tags]);
         return redirect()->route('admin.posts'); 
     }
 
@@ -43,7 +44,8 @@ class BlogsController extends Controller
 
     public function showEditForm($id){
         $blog = Blog::find($id);
-        return view('admin.update-post', compact('id', 'blog'));
+        $categories = Category::all();
+        return view('admin.update-post', compact('id', 'blog', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -52,10 +54,10 @@ class BlogsController extends Controller
         $body = $request->body;
         $imagePath = request('image')->store('uploads', 'public');
         $url = $request->url;
-        $category = $request->category;
+        $category_id = $request->category_id;
         $tags = $request->tags;
         $blog = Blog::find($id);
-        $blog->update(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category'=>$category, 'tags'=>$tags]);
+        $blog->update(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category_id'=>$category_id, 'tags'=>$tags]);
         return redirect()->route('admin.posts');
     }
 
@@ -67,7 +69,7 @@ class BlogsController extends Controller
     public function category(){
         $blogs = Blog::all();
         $cat = Category::all();
-        return view('users.category', compact('blogs', 'cat'));
+        return view('users.category', compact('blogs', 'cat'))->withCategories($cat);
     }
 
 
