@@ -28,10 +28,12 @@ Route::get('/admin-posts', 'BlogsController@showAdminPosts')->name('admin.posts'
 Route::get('/posts/edit/{id}', 'BlogsController@showEditForm')->name('posts.edit');
 Route::put('/posts/update/{id}', 'BlogsController@update')->name('admin-posts.update');
 Route::delete('/posts/{id}', 'BlogsController@destroy')->name('posts.delete');
-Route::get('/category', 'BlogsController@category')->name('category');
 
 
 //Categories
-Route::resource('categories', 'CategoryController', ['except' => ['create']]); 
+Route::get('/category', 'BlogsController@category')->name('category');
+Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+Route::resource('tags', 'TagController', ['except' => ['create']]);
 Route::get('/category_create', 'CategoryController@index')->name('category.create');
+Route::get('/add-tag', 'TagController@index')->name('tag.add');
 Route::post('/store', 'CategoryController@store')->name('categories.store');
