@@ -5,10 +5,9 @@
             <title>
                 Blog App
             </title>
-            <link href="dist/css/main.css" rel="stylesheet">
-                <link href="dist/css/bootstrap.css" rel="stylesheet">
-                </link>
-            </link>
+            <link href="{{asset('dist/css/main.css')}}" rel="stylesheet">
+            <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet">
+            <link href="{{asset('dist/css/select2.min.css')}}" rel="stylesheet">
         </meta>
     </head>
     <body>
@@ -43,11 +42,11 @@
 
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Enter Title Here" value="{{$blog->title}}">> 
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title Here" value="{{$blog->title}}"> 
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <textarea name="body" class="form-control" name="body" rows="10" placeholder="Enter Body Here">"{{$blog->body}}"</textarea>
+                        <textarea name="body" class="form-control" name="body" rows="10" placeholder="Enter Body Here">{{$blog->body}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
@@ -61,23 +60,36 @@
                     <div class="form-group">
                         <label for="category_id">Category</label>
                         <select class="form-control" name="category_id">
-                            <option>{{$blog->cat['name']}}</option>
                         @foreach($categories as $category)
-                            <option value='{{ $category->id }}'>{{$category->name}}</option>
+                            <option value='{{ $category->id }}'
+                            @if ($category->id == $blog->cat->id)
+                                class ='label-default' selected="selected"
+                            @endif
+                            >{{$category->name}}</option>
                         @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="tags">Tags</label>
-                        <input type="text" class="form-control" name="tags" placeholder="Enter Tag Here" value="{{$blog->tags}}">
+                        <select class="form-control select2-multi" name="tags[]" multiple='multiple'>
+                        @foreach($tags as $tag)
+                            <option value='{{ $tag->id }}'>{{ $tag->name }}</option>
+                        @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Blog Post</button>
                 </form>
             </div>
             <!-- /container -->
-            <script src="dist/js/jquery3.min.js">
+            <script src="{{asset('dist/js/jquery3.min.js')}}">
             </script>
-            <script src="dist/js/bootstrap.js">
+            <script src="{{asset('dist/js/bootstrap.js')}}">
+            </script>
+            <script src="{{asset('dist/js/select2.min.js')}}">
+            </script>
+            <script type="text/javascript">
+                $('.select2-multi').select2();
+                $('.select2-multi').select2().val({!! json_encode($blog->tags()->allRelatedIds()) !!}).trigger('change'); 
             </script>
         </div>
     </body>

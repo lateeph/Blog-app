@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Blog;
 use App\Comment;
 use App\Category;
+use App\Tag;
+
 
 class BlogsController extends Controller
 {
     public function ShowAddBlogForm(){
         $categories = Category::all();
-        return view('admin.add-blog')->withCategories($categories);
+        $tags = Tag::all();
+        return view('admin.add-blog', compact('categories', 'tags'));
     }
 
     public function addBlog(Request $request){
@@ -21,8 +24,9 @@ class BlogsController extends Controller
         $url = $request->url;
         $category_id = $request->category_id;
         $tags = $request->tags;
-        Blog::create(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category_id'=>$category_id, 'tags'=>$tags]);
-        return redirect()->route('admin.posts'); 
+        $blog = Blog::create(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category_id'=>$category_id]);
+        $blog->tags()->sync($request->tags, false);
+        return redirect()->route('admin.posts', $blog->id); 
     }
 
     public function showPosts(){
@@ -45,7 +49,8 @@ class BlogsController extends Controller
     public function showEditForm($id){
         $blog = Blog::find($id);
         $categories = Category::all();
-        return view('admin.update-post', compact('id', 'blog', 'categories'));
+        $tags = Tag::all();
+        return view('admin.update-post', compact('id', 'blog', 'categories', 'tags'));
     }
 
     public function update(Request $request, $id)
@@ -55,14 +60,21 @@ class BlogsController extends Controller
         $imagePath = request('image')->store('uploads', 'public');
         $url = $request->url;
         $category_id = $request->category_id;
-        $tags = $request->tags;
         $blog = Blog::find($id);
-        $blog->update(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category_id'=>$category_id, 'tags'=>$tags]);
-        return redirect()->route('admin.posts');
+        $blog->update(['title'=>$title, 'body'=>$body, 'image'=>$imagePath, 'url'=>$url, 'category_id'=>$category_id]);
+        if (isset($request->tags)) {
+            $blog->tags()->sync($request->tags);
+        } else {
+            $blog->tags()->sync(array());
+        }
+        
+        return redirect()->route('admin.posts', $blog->id);
     }
 
-    public function destroy($id){	
-        Blog::destroy($id);
+    public function destroy($id){
+        $blog = Blog::find($id);
+        $blog->tags()->detach();
+        $blog->delete();
         return redirect()->route('admin.posts');
     }
 

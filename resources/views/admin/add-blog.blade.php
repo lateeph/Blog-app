@@ -5,11 +5,9 @@
             <title>
                 Blog App
             </title>
-            <link href="dist/css/main.css" rel="stylesheet">
-                <link href="dist/css/bootstrap.css" rel="stylesheet">
-                </link>
-            </link>
-        </meta>
+            <link href="{{asset('dist/css/main.css')}}" rel="stylesheet">
+            <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet">
+            <link href="{{asset('dist/css/select2.min.css')}}" rel="stylesheet">
     </head>
     <body>
         <div class="container">
@@ -60,21 +58,30 @@
                         <label for="category_id">Category</label>
                         <select class="form-control" name="category_id">
                             @foreach($categories as $category)
-                            <option value='{{ $category->id }}'>{{ $category->name }}</option>
+                                <option value='{{ $category->id }}'>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="tags">Tags</label>
-                        <input type="text" class="form-control" name="tags" placeholder="Enter Tag Here">
+                        <select class="form-control select2-multi" name="tags[]" multiple='multiple'>
+                            @foreach($tags as $tag)
+                                <option value='{{ $tag->id }}'>{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add Blog Post</button>
                 </form>
             </div>
             <!-- /container -->
-            <script src="dist/js/jquery3.min.js">
+            <script src="{{asset('dist/js/jquery3.min.js')}}">
             </script>
-            <script src="dist/js/bootstrap.js">
+            <script src="{{asset('dist/js/bootstrap.js')}}">
+            </script>
+            <script src="{{asset('dist/js/select2.min.js')}}">
+            </script>
+            <script type="text/javascript">
+                $('.select2-multi').select2();
             </script>
         </div>
     </body>

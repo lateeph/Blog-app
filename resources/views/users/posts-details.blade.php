@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>NoteBook App</title>
-    <link rel="stylesheet" href="dist/css/main.css">
-    <link rel="stylesheet" href="dist/css/bootstrap.css">
+    <link href="{{asset('dist/css/main.css')}}" rel="stylesheet">
+    <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('dist/css/select2.min.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -32,34 +33,38 @@
     
     
 
+    <div class="container-fluid">
+        <form action="{{route('comments.save', $blog->id)}}" method="post">
+            {{csrf_field()}}
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" placeholder="Insert Name" name="name">
+            </div>
+            <p>Add a Comment</p>
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea class="form-control" rows="3" cols="100" name="comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+        @foreach($comments as $comment)
+            <div class="jumbotron">
+                <h3>{{  $comment->name  }}</h3>
+                <p> 
+                    {{  $comment->comment  }}
+                </p>
+            </div>
+        @endforeach
     
-    <form action="{{route('comments.save', $blog->id)}}" method="post">
-        {{csrf_field()}}
-        <div class="form-group">
-            <label for="Name">Name</label>
-            <input type="text" class="form-control" placeholder="Insert Name" name="name">
-        </div>
-        <p>Add a Comment</p>
-        <div class="form-group">
-            <label for="comment">Comment</label>
-            <textarea class="form-control" rows="3" cols="100" name="comment"></textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    <div>
 
-    @foreach($comments as $comment)
-        <div class="jumbotron">
-            <h3>{{  $comment->name  }}</h3>
-            <p> 
-                {{  $comment->comment  }}
-            </p>
-        </div>
-    @endforeach
-    
-
-
-    <script src="dist/js/jquery3.min.js"></script>
-    <script src="dist/js/bootstrap.js"></script>
+    <script src="{{asset('dist/js/jquery3.min.js')}}">
+    </script>
+    <script src="{{asset('dist/js/bootstrap.js')}}">
+    </script>
+    <script src="{{asset('dist/js/select2.min.js')}}">
+    </script>
 </body>
 
 </html>

@@ -15,11 +15,12 @@ class CreateBlogTagTable extends Migration
     {
         Schema::create('blog_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('blog_id')->nullable()->unsigned();
+            $table->bigInteger('blog_id')->unsigned();
             $table->foreign('blog_id')->references('id')->on('blogs');
 
-            $table->bigInteger('tag_id')->nullable()->unsigned();
+            $table->bigInteger('tag_id')->unsigned();
             $table->foreign('tag_id')->references('id')->on('tags');
+            $table->timestamps();
         });
     }
 

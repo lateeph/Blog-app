@@ -17,8 +17,15 @@
                 <center>
                     <a href="{{route('posts.details', $blog->id)}}">
                         <h3>{{  $blog->title  }}</h3>
-                         <p>{{ $blog->cat['name'] }}</p>
-                    <br><br>
+                        
+                    <br>
+                        <div class="tags">
+                        @foreach( $blog->tags as $tag )
+                                <span class="label label-default">{{ $tag->name }}</span>
+                        @endforeach    
+                        </div>
+                    </a>
+                        <p>Posted In: {{ $blog->cat['name'] }}</p>
                     <a class="btn btn-sm btn-info pull-xs-left" href="{{route('posts.edit', $blog->id)}}">
                             Edit
                     </a>

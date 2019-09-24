@@ -5,11 +5,9 @@
             <title>
                 Blog App
             </title>
-            <link href="dist/css/main.css" rel="stylesheet">
-            <link href="dist/css/bootstrap.css" rel="stylesheet">
-            </link>
-            </link>
-        </meta>
+            <link href="{{asset('dist/css/main.css')}}" rel="stylesheet">
+            <link href="{{asset('dist/css/bootstrap.css')}}" rel="stylesheet">
+            <link href="{{asset('dist/css/select2.min.css')}}" rel="stylesheet">
     </head>
     <body>
         <div class="container">
@@ -72,9 +70,11 @@
 
             @yield('main')
 
-            <script src="dist/js/jquery3.min.js">
+            <script src="{{asset('dist/js/jquery3.min.js')}}">
             </script>
-            <script src="dist/js/bootstrap.js">
+            <script src="{{asset('dist/js/bootstrap.js')}}">
+            </script>
+            <script src="{{asset('dist/js/select2.min.js')}}">
             </script>
         </div>
     </body>

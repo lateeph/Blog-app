@@ -11,6 +11,7 @@
                         <th>Name</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @foreach ($tags as $tag)
                     <tr>
@@ -30,7 +31,7 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name:</label>
                     <div class="col-sm-10">
-                    <input type="name" class="form-control" id="name" placeholder="name" name="name">
+                        <input type="name" class="form-control" id="name" placeholder="name" name="name">
                     </div>
                 </div>
                 <div class="form-group">

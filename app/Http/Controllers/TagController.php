@@ -8,8 +8,6 @@ use Session;
 
 class TagController extends Controller
 {
-
-    
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +16,9 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        return view('admin.add-tag')->withTags($tags);
+        return view('admin.add-tag', compact('tags'));
     }
 
-   
 
     /**
      * Store a newly created resource in storage.
