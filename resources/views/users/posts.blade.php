@@ -12,7 +12,8 @@
                 <center>
                     <a href="{{route('posts.details', $blog->id)}}">
                         <h3>{{  $blog->title  }}</h3>
-                        <img src="/storage/{{ $blog->image }}"></a>
+                        <img src="/storage/{{ $blog->image }}">
+                    </a>
                     {{ $blog->cat['name'] }}
                     <br><br>
                 </center>

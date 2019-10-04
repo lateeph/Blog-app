@@ -78,10 +78,14 @@ class BlogsController extends Controller
         return redirect()->route('admin.posts');
     }
 
-    public function category(){
-        $blogs = Blog::all();
-        $cat = Category::all();
-        return view('users.category', compact('blogs', 'cat'))->withCategories($cat);
+    public function category($cat_id){
+        $blogs = Blog::where('category_id',$cat_id)->get(); 
+        // $cat = Category::all();
+        //$category = Blog::has('blogs')->get();
+        //return view('users.category', compact('category'));
+        
+       
+        return view('users.category', compact('blogs'));
     }
 
 

@@ -21,7 +21,7 @@
                     <br>
                         <div class="tags">
                         @foreach( $blog->tags as $tag )
-                                <span class="label label-default">{{ $tag->name }}</span>
+                                <span class="badge badge-secondary">{{ $tag->name }}</span>
                         @endforeach    
                         </div>
                     </a>
