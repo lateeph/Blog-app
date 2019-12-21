@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag;
-use Session;
 
-class TagController extends Controller
+class ApiTagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return view('admin.add-tag', compact('tags'));
+        return Tag::all();
     }
 
 

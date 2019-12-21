@@ -3,22 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tag;
-use Session;
+use App\Category;
 
-class TagController extends Controller
+class ApiCategoryController extends Controller
 {
+    public function index()
+    {
+        //
+        return Category::all();
+    }
+
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create()
     {
-        $tags = Tag::all();
-        return view('admin.add-tag', compact('tags'));
+        //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -28,14 +31,19 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, array('name' => 'required|max:255'));
-        $tag = new Tag;
-        $tag->name = $request->name;
-        $tag->save();
+        //
+        $this->validate($request, array(
+           'name' => 'required|max:255' 
+        ));
 
-        Session::flash('success', 'New Tag was successfully created!');
+        $category = new Category;
 
-        return redirect()->route('tag.add');
+        $category->name = $request->name;
+        $category->save();
+
+        Session::flash('success', 'New Category has been created');
+
+        return redirect()->route('category.create');
     }
 
     /**
@@ -72,7 +80,7 @@ class TagController extends Controller
         //
     }
 
-    // *
+    // //*
     //  * Remove the specified resource from storage.
     //  *
     //  * @param  int  $id
